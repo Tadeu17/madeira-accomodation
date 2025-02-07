@@ -13,12 +13,13 @@
           </a>
         </div>
 
-        <div class="h-[400px] max-w-[600px] relative  mx-auto rounded-lg overflow-hidden shadow-lg">
+        <div class="h-[400px] max-w-[600px] relative mx-auto rounded-lg overflow-hidden shadow-lg">
           <UCarousel v-slot="{ item }" ref="carouselRef" :items="carouselItems" arrows indicators :ui="{
+            item: 'basis-full',
             wrapper: 'h-full',
             container: 'h-full w-full',
           }">
-            <img :src="item.src" :alt="item.alt" class="w-full h-full object-cover" />
+            <img :src="item.src" :alt="item.alt" width="400" height="600" class="w-full h-full object-cover" />
           </UCarousel>
         </div>
       </div>
@@ -27,8 +28,8 @@
     <section class="features py-16">
       <h2 class="text-3xl font-semibold mb-8 text-center">Property Rooms</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <FeatureCard v-for="feature in features" :key="feature.title" :title="feature.title"
-          :description="feature.description" :image="feature.image" />
+        <FeatureCard v-for="feature in features" :key="feature.title" class="w-[400px] h-[300px]" :title="feature.title"
+          :description="feature.description" :caroussel="feature.caroussel" />
       </div>
     </section>
 
@@ -58,7 +59,7 @@
           </div>
           <div>
             <UFormGroup label="Check-out">
-              <UInput v-model="state.checkOut" type="date" required  />
+              <UInput v-model="state.checkOut" type="date" required />
             </UFormGroup>
           </div>
         </div>
@@ -86,15 +87,15 @@ useHead({
 
 const carouselItems = [
   {
-    src: '/feature-1.jpg',
+    src: '/general-house-grid.webp',
     alt: 'Beautiful view of the property'
   },
   {
-    src: '/feature-1.jpg',
+    src: '/room1-balcony.webp',
     alt: 'Interior of the property'
   },
   {
-    src: '/feature-1.jpg',
+    src: '/living-room-2.webp',
     alt: 'Property amenities'
   }
 ]
@@ -116,17 +117,75 @@ const features = [
   {
     title: "Room 1",
     description: "Suite, a Queen size bed with private WC with stunning overview landscape of funchal",
-    image: "/feature-1.jpg"
+    image: "/feature-1.jpg",
+    caroussel: [
+      {
+        src: '/room1-1.webp',
+        alt: 'Visuals on room 1.'
+      },
+      {
+        src: '/room2-2.webp',
+        alt: 'Visuals on room 2.'
+      },
+      {
+        src: '/room1-3.webp',
+        alt: 'Visuals on room 3.'
+      },
+      {
+        src: '/room1-4.webp',
+        alt: 'Visuals on room 4.'
+      },
+      {
+        src: '/room1-wc.webp',
+        alt: 'Visuals on room WC.'
+      },
+    ]
   },
   {
     title: "Room 2",
     description: "Very spacious room with Quee size bed, plenty of natural light and a desk for you use.",
-    image: "/feature-1.jpg"
+    image: "/feature-1.jpg",
+    caroussel: [
+      {
+        src: '/room2-1.webp',
+        alt: 'Visuals on room 2.'
+      },
+      {
+        src: '/room2-2.webp',
+        alt: 'Visuals on room 2.'
+      },
+      {
+        src: '/wc-shared-1.webp',
+        alt: 'Visuals on shared WC between room 2 and 3.'
+      },
+      {
+        src: '/wc-shared-2.webp',
+        alt: 'Visuals on shared WC between room 2 and 3.'
+      }
+    ]
   },
   {
     title: "Room 3",
     description: "Cosy room with the essentials for a very nice stay, Queen size bed to make sure you have the best sleep.",
-    image: "/feature-1.jpg"
+    image: "/feature-1.jpg",
+    caroussel: [
+      {
+        src: '/room3-1.webp',
+        alt: 'Visuals on room 3.'
+      },
+      {
+        src: '/room3-2.webp',
+        alt: 'Visuals on room 3.'
+      },
+      {
+        src: '/wc-shared-1.webp',
+        alt: 'Visuals on shared WC between room 2 and 3.'
+      },
+      {
+        src: '/wc-shared-2.webp',
+        alt: 'Visuals on shared WC between room 2 and 3.'
+      }
+    ]
   }
 ];
 

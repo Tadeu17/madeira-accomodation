@@ -1,6 +1,12 @@
 <template>
   <div class="feature-card">
-    <img :src="image" :alt="title" class="mb-4 rounded-lg" />
+    <UCarousel v-slot="{ item }" :items="caroussel" arrows indicators :ui="{
+      item: 'basis-full',
+      wrapper: 'h-full',
+      container: 'h-full w-full',
+    }">
+      <img :src="item.src" :alt="item.alt" width="300" height="300" class="w-full h-full object-cover" />
+    </UCarousel>
     <h3 class="text-xl font-semibold mb-2">{{ title }}</h3>
     <p class="text-gray-600">{{ description }}</p>
   </div>
@@ -16,8 +22,8 @@ defineProps({
     type: String,
     required: true
   },
-  image: {
-    type: String,
+  caroussel: {
+    type: Array,
     required: true
   }
 })
