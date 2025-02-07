@@ -49,31 +49,41 @@
 
     <section id="booking" class="booking py-16 bg-gray-100">
       <h2 class="text-3xl font-semibold mb-8 text-center">Book Your Stay</h2>
-      <form class="max-w-lg mx-auto">
+      <UForm class="max-w-lg mx-auto" :state="state" @submit="onSubmit">
         <div class="grid grid-cols-2 gap-4 mb-4">
           <div>
-            <label for="check-in" class="block mb-2">Check-in</label>
-            <input type="date" id="check-in" class="w-full px-4 py-2 rounded-lg border border-gray-300" required />
+            <UFormGroup label="Check-in">
+              <UInput v-model="state.checkIn" type="date" required />
+            </UFormGroup>
           </div>
           <div>
-            <label for="check-out" class="block mb-2">Check-out</label>
-            <input type="date" id="check-out" class="w-full px-4 py-2 rounded-lg border border-gray-300" required />
+            <UFormGroup label="Check-out">
+              <UInput v-model="state.checkOut" type="date" required  />
+            </UFormGroup>
           </div>
         </div>
         <div class="mb-4">
-          <label for="guests" class="block mb-2">Number of Guests</label>
-          <input type="number" id="guests" min="1" max="6" class="w-full px-4 py-2 rounded-lg border border-gray-300"
-            required />
+          <UFormGroup label="Number of Guests">
+            <UInput v-model="state.guests" type="number" :min="1" :max="6" required />
+          </UFormGroup>
         </div>
-        <button type="submit"
-          class="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition duration-300">Check
-          Availability</button>
-      </form>
+        <UButton type="submit" color="primary" variant="solid" block>
+          Check Availability
+        </UButton>
+      </UForm>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: 'Madeira Retreat - Your Perfect Island Getaway',
+  meta: [
+    { name: 'description', content: 'Experience the beauty of Madeira in our stunning Airbnb property. Book your stay today and enjoy breathtaking views, modern amenities, and a prime location.' },
+    { name: 'keywords', content: 'Madeira, Airbnb, accomodation, vacation rental, island getaway, Portugal' },
+  ],
+})
+
 const carouselItems = [
   {
     src: '/feature-1.jpg',
@@ -193,11 +203,14 @@ const amenities = [
   }
 ]
 
-useHead({
-  title: 'Madeira Retreat - Your Perfect Island Getaway',
-  meta: [
-    { name: 'description', content: 'Experience the beauty of Madeira in our stunning Airbnb property. Book your stay today and enjoy breathtaking views, modern amenities, and a prime location.' },
-    { name: 'keywords', content: 'Madeira, Airbnb, accomodation, vacation rental, island getaway, Portugal' },
-  ],
+const state = reactive({
+  checkIn: undefined,
+  checkOut: undefined,
+  guests: undefined
 })
+
+import type { FormSubmitEvent } from '#ui/types'
+const onSubmit = (event: FormSubmitEvent<typeof state>) => {
+  console.log(event.data)
+}
 </script>
